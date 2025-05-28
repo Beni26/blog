@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css";
 import { VazirFont } from "constants/localFont";
-
-
+import Header from "@/components/Header";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -16,8 +15,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fa" dir="rtl">
-      <body className={`${VazirFont.variable} font-sans`}>
-        {children}
+      <body className={`${VazirFont.variable} font-sans min-h-screen`}>
+        <Header />
+        <div className="container mx-auto p-4 xl:max-w-screen-xl ">
+          {children}
+        </div>
       </body>
     </html>
   );

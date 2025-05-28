@@ -23,9 +23,12 @@
       // "@/*": ["./src/*"]
       "@/components/*":["components/*"],
       "@/services/*":["services/*"],
+      "@/constants/*":["constants/*"],
+      "@/hooks/*":["hooks/*"],
       "@/utils/*":["utils/*"],
       "@/lib/*":["lib/*"],
       "@/styles/*":["styles/*"],
+      "@/ui/*":["ui/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

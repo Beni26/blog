@@ -12,7 +12,7 @@ const NavLink: React.FC<NavLinkProps> = ({ path, children }) => {
   return (
     <Link
       className={`${
-        pathname === path && "text-indigo-600"
+        pathname === path ? "text-indigo-600" : "text-gray-700"
       } hover:text-indigo-700 transform ease-in-out duration-300 font-bold`}
       href={path}
     >

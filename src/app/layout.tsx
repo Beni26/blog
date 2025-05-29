@@ -17,7 +17,7 @@ export default function RootLayout({
     <html lang="fa" dir="rtl">
       <body className={`${VazirFont.variable} font-sans min-h-screen`}>
         <Header />
-        <div className="container mx-auto p-4 xl:max-w-screen-xl ">
+        <div className="container mx-auto  xl:max-w-screen-xl  flex flex-1 flex-col">
           {children}
         </div>
       </body>

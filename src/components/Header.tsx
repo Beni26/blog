@@ -23,7 +23,7 @@ const Header = () => {
   const user = false;
 
   return (
-    <header className="shadow-md">
+    <header className="z-10 shadow-md   sticky top-0  transition-all duration-200 border-b border-b-secondary-300 ">
       <nav className="container mx-auto xl:max-w-screen-xl p-4 flex justify-between">
         <ul className="flex items-center  gap-x-10">
           {navLinks.map((navLink) => (

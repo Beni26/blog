@@ -1,7 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    remotePatterns: [
+      new URL('https://backend-blog-ri3t.onrender.com/uploads/**'),
+      new URL('http://localhost:3000/images/**'),
+      new URL(' https://blog-eta-nine-65.vercel.app/images/**')],
+
+
+  },
 };
 
 export default nextConfig;

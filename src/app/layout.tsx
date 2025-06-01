@@ -16,8 +16,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fa" dir="rtl">
-      <body className={`${VazirFont.variable} font-sans min-h-screen`}>
+    <html lang="fa" dir="rtl" suppressHydrationWarning>
+      <body className={`${VazirFont.variable} font-sans min-h-screen`} suppressHydrationWarning>
         <Header />
         <div className="container mx-auto  xl:max-w-screen-xl  flex flex-1 flex-col">
           {children}

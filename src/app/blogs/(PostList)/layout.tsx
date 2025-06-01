@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import CategoryList from "./_components/CategoryList";
+import CategoryList from "../_components/CategoryList";
 
 export const metadata:Metadata = {
   title:"بلاگ ها"

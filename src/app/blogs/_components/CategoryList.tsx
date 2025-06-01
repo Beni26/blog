@@ -1,16 +1,13 @@
 import Link from "next/link";
-import { Category } from "./types";
+import { Category } from "../types";
 
 
 
 const CategoryList = async () => {
-  const res = await fetch(
-    "https://backend-blog-ri3t.onrender.com/api/category/list"
-  );
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/category/list`);
   const {
     data: { categories },
   }: { data: { categories: Category[] } } = await res.json();
-  console.log(categories);
   return (
     <ul className="space-y-4">
       {categories.map((category) => (

@@ -19,7 +19,7 @@ const Error: React.FC<ErrorProps> = ({ error, reset }) => {
       </p>
       <button
         onClick={() => reset()}
-        className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded transition"
+        className="bg-red-500 hover:bg-red-400 text-white font-semibold py-2 px-4 rounded transition"
       >
         تلاش دوباره
       </button>

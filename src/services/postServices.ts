@@ -21,7 +21,7 @@ export const getPosts = async () => {
     if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
     
     const { data } = await res.json();
-    const posts: Post[] = data?.posts || [];
+   const { posts }: { posts?: Post[] } = data || [];
 
     return posts;
   } catch (error) {

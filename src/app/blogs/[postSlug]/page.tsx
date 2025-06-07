@@ -1,18 +1,33 @@
 import Image from "next/image";
-import { Post } from "../types";
 import { notFound } from "next/navigation";
+import { getPostBySlug, getPosts } from "@/services/postServices";
 
-const SinglePost = async ({
-  params,
-}: {
-  params: Promise<{ postSlug: string }>;
-}) => {
+type Params = Promise<{ postSlug: string }>;
+
+
+
+//  export const dynamicParams = false;
+
+ export async function generateStaticParams() {
+  const posts = await getPosts();
+  const slugs = posts?.map((post)=>({postSlug : post.slug}))  || []
+  return slugs
+}
+
+
+export async function generateMetadata({ params }: { params: Params }) {
+  
   const { postSlug } = await params;
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/post/slug/${postSlug}`
-  );
-  const { data } = await res.json();
-  const { post }: { post?: Post } = data || {};
+  const post = await getPostBySlug(postSlug);
+  return {
+    title: `پست ${post?.title}`,
+  };
+}
+
+const SinglePost = async ({ params }: { params: Params }) => {
+
+  const { postSlug } = await params;
+  const post = await getPostBySlug(postSlug);
 
   if (!post) {
     notFound();

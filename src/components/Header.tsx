@@ -1,3 +1,6 @@
+"use client"
+
+import { useAuth } from "context/AuthContext";
 import NavLink from "./NavLink";
 
 interface NavLinkItem {
@@ -20,7 +23,8 @@ const navLinks: NavLinkItem[] = [
 ];
 
 const Header = () => {
-  const user = false;
+  const {user} = useAuth();
+  console.log(user)
 
   return (
     <header className="z-10 shadow-md   sticky top-0  transition-all duration-200 border-b border-b-secondary-300 mb-10 bg-white">
@@ -37,7 +41,7 @@ const Header = () => {
             {user ? (
               <NavLink path="/profile">پروفایل</NavLink>
             ) : (
-              <NavLink path="/login">ورود</NavLink>
+              <NavLink path="/signin">ورود</NavLink>
             )}
           </li>
         </ul>

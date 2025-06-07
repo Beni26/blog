@@ -2,6 +2,8 @@ import { Suspense } from "react";
 import PostList from "../_components/PostList";
 import PostsSkelton from "@/ui/PostsSkelton";
 
+export const experimental_ppr = true
+
 const BlogPage = async () => {
   return (
     <div>

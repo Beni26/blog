@@ -8,3 +8,6 @@ export const signupApi = async(data : FormSignupData)=>{
 export const signinApi = async(data : FormSigninData)=>{
     return http.post("/user/signin",data).then(({data})=>data.data);
 }
+export const getUserApi = async()=>{
+    return http.get("/user/profile").then(({data})=>data.data);
+}

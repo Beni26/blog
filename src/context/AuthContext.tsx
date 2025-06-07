@@ -1,10 +1,10 @@
 "use client";
-import { signinApi, signupApi } from "@/services/authService";
+import { getUserApi, signinApi, signupApi } from "@/services/authService";
 import { FormSigninData } from "app/(auth)/signin/page";
 import { FormSignupData } from "app/(auth)/signup/page";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 import { toast } from "sonner";
 
 type AuthContextType = {
@@ -19,7 +19,7 @@ type AuthContextType = {
 type AuthAction =
   | { type: "loading" }
   | { type: "rejected"; payload: string }
-  | { type: "signin" | "signup"; payload: any };
+  | { type: "signin" | "signup" | "user/loaded"; payload: any };
 
 type AuthState = {
   user: any;
@@ -58,6 +58,13 @@ const authReducer = (state: AuthState, action: AuthAction) => {
         error: null,
       };
     case "signup":
+      return {
+        user: action.payload,
+        isAuthenticated: true,
+        isLoading: false,
+        error: null,
+      };
+    case "user/loaded":
       return {
         user: action.payload,
         isAuthenticated: true,
@@ -110,6 +117,24 @@ export default function AuthProvider({
     }
   };
 
+  const getUser = async () => {
+    dispatch({ type: "loading" });
+    try {
+      const { user } = await getUserApi();
+      dispatch({ type: "user/loaded", payload: user });
+    } catch (error) {
+      const err = error as AxiosError<{ message: string }>;
+      const errMsg = err.response?.data?.message;
+      dispatch({ type: "rejected", payload: errMsg ?? "Unknown error" });
+      toast.error(errMsg || "خطایی رخ داد");
+    }
+  };
+  useEffect(() => {
+    async function fetchData() {
+      await getUser();
+    }
+    fetchData();
+  }, []);
   return (
     <AuthContext.Provider
       value={{ user, isAuthenticated, isLoading, error, signin, signup }}

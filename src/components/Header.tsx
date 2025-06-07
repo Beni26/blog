@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useAuth } from "context/AuthContext";
 import NavLink from "./NavLink";
@@ -23,11 +23,14 @@ const navLinks: NavLinkItem[] = [
 ];
 
 const Header = () => {
-  const {user} = useAuth();
-  console.log(user)
+  const { user, isLoading } = useAuth();
 
   return (
-    <header className="z-10 shadow-md   sticky top-0  transition-all duration-200 border-b border-b-secondary-300 mb-10 bg-white">
+    <header
+      className={`z-10 shadow-md   sticky top-0  transition-all duration-200 border-b border-b-secondary-300 mb-10 bg-white ${
+        isLoading && "blur-[3px]"
+      } `}
+    >
       <nav className="container mx-auto xl:max-w-screen-xl p-4 flex justify-between">
         <ul className="flex items-center  gap-x-10">
           {navLinks.map((navLink) => (

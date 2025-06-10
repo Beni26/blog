@@ -24,6 +24,7 @@ const PostInteraction: React.FC<comentsCountProps> = ({
   const router = useRouter();
 
   // حالت داخلی برای like کردن با امکان کنترل انیمیشن
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [liked, setLiked] = useState(isLiked);
   const lottieRef = useRef<LottieRefCurrentProps>(null);
   const isFirstRender = useRef(true);
@@ -52,7 +53,7 @@ const PostInteraction: React.FC<comentsCountProps> = ({
 
   const likeHandler = async (postId: string) => {
     try {
-      const { message } = await likePost(postId);
+      await likePost(postId);
 
       // تغییر حالت liked برای نمایش انیمیشن
       setLiked((prev) => !prev);

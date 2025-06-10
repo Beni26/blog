@@ -68,7 +68,7 @@ const PostInteraction: React.FC<comentsCountProps> = ({
   };
 
   return (
-    <div className="flex justify-between gap-3">
+    <div className="flex  gap-3">
       <Button className="hover:cursor-pointer w-[50px] h-[40px]" variant="outline" >
         <MessageSquare /> {toPersianDigits(commentsCount)}
       </Button>
@@ -84,7 +84,7 @@ const PostInteraction: React.FC<comentsCountProps> = ({
             animationData={animationData}
             loop={false}
             autoplay={false}
-            className="absolute -top-2.5 stroke-1 stroke-red-600"
+            className="absolute -top-2.5 stroke-1 stroke-red-600 bg-white"
           />
       </Button>
 

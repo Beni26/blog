@@ -126,7 +126,6 @@ export default function AuthProvider({
       const err = error as AxiosError<{ message: string }>;
       const errMsg = err.response?.data?.message;
       dispatch({ type: "rejected", payload: errMsg ?? "Unknown error" });
-      toast.error(errMsg || "خطایی رخ داد");
     }
   };
   useEffect(() => {

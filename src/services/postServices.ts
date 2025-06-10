@@ -1,4 +1,5 @@
 import { Post } from "app/blogs/types";
+import http from "./httpService";
 
 export const getPostBySlug = async(slug:string)=>{
  const res = await fetch(
@@ -8,11 +9,17 @@ export const getPostBySlug = async(slug:string)=>{
   const { post }: { post?: Post } = data || {};
   return post
 }
-export const getPosts = async()=>{
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/post/list`);
+export const getPosts = async(options:RequestInit)=>{
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/post/list`,
+   options
+  );
   const { data } = await res.json();
   const { posts }: { posts?: Post[] } = data || []; 
   
 
   return posts
+}
+
+export const likePost=async(postId:string)=>{
+  return http.post(`/post/like/${postId}`).then(({data})=>data.data)
 }

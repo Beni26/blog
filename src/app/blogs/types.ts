@@ -39,7 +39,7 @@ type Comment = {
   answers: CommentAnswer[];
 };
 
-type RelatedPost = {
+export type RelatedPost = {
   _id: string;
   title: string;
   slug: string;

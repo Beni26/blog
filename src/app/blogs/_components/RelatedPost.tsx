@@ -1,8 +1,9 @@
-import { Post } from "../types";
+import { RelatedPost as RelatedType } from "../types";
 import Author from "./Author";
 import CoverImage from "./CoverImage";
 
-const RelatedPost = ({ posts }: { posts: Post[] }) => {
+const RelatedPost = ({ posts }: { posts: RelatedType[] }) => {
+    console.log(posts)
   return (
     <div className="mb-10">
       <p className="text-x; mb-4">پست های مرتبط</p>

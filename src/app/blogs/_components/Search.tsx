@@ -1,16 +1,19 @@
-"use client";
+// Search.tsx
+'use client'
+
 import { Input } from "@/ui/input";
 import { Search as SearchIcon } from "lucide-react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { Suspense } from "react";
 
-const Search = () => {
+const SearchInner = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
 
-  const handelSearch = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = e.target as HTMLFormElement;
+    const form = e.currentTarget;
     const value = form.search.value.trim();
 
     const newParams = new URLSearchParams(searchParams.toString());
@@ -19,27 +22,34 @@ const Search = () => {
     } else {
       newParams.delete("search");
     }
+
     router.push(`${pathname}?${newParams.toString()}`, { scroll: false });
-    // e.currentTarget.reset();
   };
 
   return (
-    <div>
-      <form className="relative" onSubmit={handelSearch}>
-        <Input
-          type="text"
-          name="search"
-          autoComplete="off"
-          placeholder="جستجو..."
-        />
-        <button
-          className="absolute left-3 top-1/2 -translate-y-1/2 cursor-pointer"
-          type="submit"
-        >
-          <SearchIcon className="text-gray-400" size="20" />
-        </button>
-      </form>
-    </div>
+    <form className="relative" onSubmit={handleSearch}>
+      <Input
+        type="text"
+        name="search"
+        autoComplete="off"
+        placeholder="جستجو..."
+      />
+      <button
+        className="absolute left-3 top-1/2 -translate-y-1/2 cursor-pointer"
+        type="submit"
+      >
+        <SearchIcon className="text-gray-400" size="20" />
+      </button>
+    </form>
   );
 };
+
+const Search = () => {
+  return (
+    <Suspense fallback={null}>
+      <SearchInner />
+    </Suspense>
+  );
+};
+
 export default Search;

@@ -3,7 +3,6 @@ import Author from "./Author";
 import CoverImage from "./CoverImage";
 
 const RelatedPost = ({ posts }: { posts: RelatedType[] }) => {
-    console.log(posts)
   return (
     <div className="mb-10">
       <p className="text-x; mb-4">پست های مرتبط</p>

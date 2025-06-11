@@ -9,10 +9,9 @@ export const getPostBySlug = async(slug:string)=>{
   const { post }: { post?: Post } = data || {};
   return post
 }
-export const getPosts = async (options?: RequestInit, categorySlug?: string) => {
-  const baseUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/post/list`;
-  const url =
-    !categorySlug  ? baseUrl : `${baseUrl}?categorySlug=${categorySlug}`;
+export const getPosts = async (options?: RequestInit, queries?: string) => {
+  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/post/list?${queries}`;
+
 
   const res = await fetch(url, options);
   const { data } = await res.json();

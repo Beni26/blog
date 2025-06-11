@@ -9,16 +9,17 @@ export const getPostBySlug = async(slug:string)=>{
   const { post }: { post?: Post } = data || {};
   return post
 }
-export const getPosts = async(options?:RequestInit)=>{
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/post/list`,
-   options
-  );
-  const { data } = await res.json();
-  const { posts }: { posts?: Post[] } = data || []; 
-  
+export const getPosts = async (options?: RequestInit, categorySlug?: string) => {
+  const baseUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/post/list`;
+  const url =
+    !categorySlug  ? baseUrl : `${baseUrl}?categorySlug=${categorySlug}`;
 
-  return posts
-}
+  const res = await fetch(url, options);
+  const { data } = await res.json();
+  const { posts }: { posts?: Post[] } = data || [];
+
+return posts || [];
+};
 
 export const likePost=async(postId:string)=>{
   return http.post(`/post/like/${postId}`).then(({data})=>data.data)

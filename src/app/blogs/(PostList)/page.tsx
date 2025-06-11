@@ -1,20 +1,21 @@
-import { Suspense } from "react";
 import PostList from "../_components/PostList";
+import { cookies } from "next/headers";
+import setCookieOnReq from "@/utils/setCookieOnReq";
+import { getPosts } from "@/services/postServices";
+import { Suspense } from "react";
 import PostsSkelton from "@/ui/PostsSkelton";
 
-export const experimental_ppr = true
+// export const experimental_ppr = true
 
 const BlogPage = async () => {
+  const cookieStore = cookies();
+  const options = setCookieOnReq(await cookieStore);
+  const posts = await getPosts(options as RequestInit);
+
   return (
     <div>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente sed
-        cum perferendis perspiciatis eligendi adipisci error ipsam natus
-        molestiae non suscipit similique, architecto repudiandae, hic facere
-        distinctio est veritatis quaerat.
-      </p>
       <Suspense fallback={<PostsSkelton />}>
-        <PostList />
+        <PostList posts={posts} />
       </Suspense>
     </div>
   );

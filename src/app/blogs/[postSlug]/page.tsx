@@ -2,8 +2,10 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getPostBySlug, getPosts } from "@/services/postServices";
 import RelatedPost from "../_components/RelatedPost";
+import PostComment from "../_components/comment/PostComment";
 
 type Params = Promise<{ postSlug: string }>;
+
 
 
 
@@ -49,7 +51,7 @@ const SinglePost = async ({ params }: { params: Params }) => {
         </div>
       </div>
       {post.related.length > 0 && <RelatedPost posts={post.related}/>}
-
+      <PostComment post={post} />
     </div>
   );
 };

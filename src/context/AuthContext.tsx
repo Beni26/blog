@@ -1,8 +1,9 @@
 "use client";
-import { getUserApi, signinApi, signupApi } from "@/services/authService";
+import { getUserApi, signupApi } from "@/services/authService";
+// import http from "@/services/httpService";
 import { FormSigninData } from "app/(auth)/signin/page";
 import { FormSignupData } from "app/(auth)/signup/page";
-import { AxiosError } from "axios";
+import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useReducer } from "react";
 import { toast } from "sonner";
@@ -91,7 +92,9 @@ export default function AuthProvider({
   const signin = async (values: FormSigninData) => {
     dispatch({ type: "loading" });
     try {
-      const { user, message } = await signinApi(values);
+      // const { user, message } = await signinApi(values);
+      const { user, message } = await axios.post("/api/auth/login", values).then(({data})=>data);
+
       dispatch({ type: "signin", payload: user });
       toast.success(message);
       router.push("/profile");

@@ -34,28 +34,27 @@ const PostInteraction: React.FC<comentsCountProps> = ({
     lottieRef.current.goToAndStop(liked ? totalFrames : 0, true);
   }, []);
 
-const likeHandler = async (postId: string) => {
-  try {
-    const totalFrames = lottieRef.current?.getDuration(true) ?? 10;
+  const likeHandler = async (postId: string) => {
+    try {
+      const totalFrames = lottieRef.current?.getDuration(true) ?? 10;
 
-    if (liked) {
-      lottieRef.current?.setSpeed(1.5);
-      lottieRef.current?.playSegments([totalFrames, 0], true);
-    } else {
-      lottieRef.current?.setSpeed(1);
-      lottieRef.current?.playSegments([0, totalFrames], true);
+      await likePost(postId);
+      if (liked) {
+        lottieRef.current?.setSpeed(1.5);
+        lottieRef.current?.playSegments([totalFrames, 0], true);
+      } else {
+        lottieRef.current?.setSpeed(1);
+        lottieRef.current?.playSegments([0, totalFrames], true);
+      }
+
+      setLiked((prev) => !prev);
+      router.refresh();
+    } catch (error) {
+      const err = error as any;
+      const errMsg = err?.response?.data?.message || "خطا در عملیات";
+      toast.error(errMsg);
     }
-
-    setLiked((prev) => !prev);
-    await likePost(postId);
-    router.refresh();
-  } catch (error) {
-    const err = error as any;
-    const errMsg = err?.response?.data?.message || "خطا در عملیات";
-    toast.error(errMsg);
-  }
-};
-
+  };
 
   return (
     <div className="flex  gap-3">
@@ -67,7 +66,7 @@ const likeHandler = async (postId: string) => {
       </Button>
 
       <Button
-        className="hover:cursor-pointer p-0 flex items-center justify-center w-[50px] h-[40px] relative"
+        className="hover:cursor-pointer p-0 flex items-center justify-center w-[50px] h-[40px] relative overflow-hidden"
         variant="outline"
         size="sm"
         onClick={() => likeHandler(_id)}

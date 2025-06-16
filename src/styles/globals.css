@@ -118,5 +118,9 @@
     @apply bg-background text-foreground;
     display: flex;
     flex-direction: column;
+    font-family: var(--font-vazir);
   }
+}
+[data-sonner-toaster] {
+  font-family: var(--font-vazir) !important;
 }

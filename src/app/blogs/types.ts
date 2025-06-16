@@ -20,7 +20,7 @@ type CommentContent = {
   text: string;
 };
 
-type CommentAnswer = {
+export type CommentAnswer = {
   _id: string;
   content: CommentContent;
   status: number;
@@ -28,8 +28,11 @@ type CommentAnswer = {
   createdAt: string;
   user: Author;
 };
-
-type Comment = {
+export type initialStateType =
+  | { message: string; error?: undefined }
+  | { error: string; message?: undefined };
+  
+export type Comment = {
   _id: string;
   content: CommentContent;
   status: number;

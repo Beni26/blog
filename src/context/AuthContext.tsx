@@ -104,6 +104,7 @@ export default function AuthProvider({
       dispatch({ type: "rejected", payload: errMsg ?? "Unknown error" });
       toast.error(errMsg || "خطایی رخ داد");
     }
+    
   };
 
   const signup = async (values: FormSignupData) => {

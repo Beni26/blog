@@ -6,7 +6,7 @@ import { initialStateType } from "app/blogs/types";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
-type CreateCommentProps = {
+export type CreateCommentProps = {
   postId: string;
   parentId?: string | null;
   formData: FormData;

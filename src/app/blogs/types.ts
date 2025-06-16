@@ -82,3 +82,17 @@ export type PostsResponse = {
   message: string;
   posts: Post[];
 };
+
+export type rawFormData = {
+    postId: string;
+    parentId: string | null;
+    text: FormDataEntryValue | null;
+}
+
+export type optionsType= {
+    method: string;
+    credentials: string;
+    headers: {
+        Cookie: string;
+    };
+}
